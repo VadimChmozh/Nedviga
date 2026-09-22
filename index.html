@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Недвижимость — дома и квартиры в Армавире</title>
+    <!-- Шрифты Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Подключение CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ВЕРХНЯЯ ИНФО-ПОЛОСА -->
+    <div class="top-bar">
+        <div class="container top-bar-container">
+            <div class="top-bar-left">
+                <span>📍 Армавир и Краснодарский край</span>
+                <span class="top-divider">•</span>
+                <span>⏰ Ежедневно с 09:00 до 21:00</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="tel:+79182664060">📞 +7 (918) 266-40-60</a>
+                <button class="admin-quick-btn" onclick="openAdminModal()">🔐 Кабинет риелтора</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ОСНОВНАЯ ШАПКА -->
+    <header class="header" id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div class="logo-mark">OOO</div>
+                <div class="logo-copy">
+                    <span class="logo-title">АРМАВИР</span>
+                    <span class="logo-sub">НЕДВИЖИМОСТЬ</span>
+                </div>
+            </a>
+
+            <nav class="nav" id="navMenu">
+                <ul>
+                    <li><a href="#hero" class="nav-link">Главная</a></li>
+                    <li><a href="#catalog" class="nav-link">Каталог</a></li>
+                    <li><a href="#services" class="nav-link">Услуги</a></li>
+                    <li><a href="#calculator" class="nav-link">Ипотека</a></li>
+                    <li><a href="#reviews" class="nav-link">Отзывы</a></li>
+                    <li><a href="#contacts" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#booking" class="btn btn-primary btn-sm">Заявка на показ</a>
+                <button class="burger" id="burgerBtn" aria-label="Открыть меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ГЛАВНЫЙ ЭКРАН (HERO) -->
+    <section class="hero" id="hero">
+        <div class="hero-backdrop"></div>
+        <div class="container hero-container">
+            <div class="hero-content anim-reveal">
+                <span class="hero-chip">✨ Персональный подбор без скрытых комиссий</span>
+                <h1>Недвижимость премиум-класса <span>в Армавире</span></h1>
+                <p>Продажа проверенных загородных домов, элитных коттеджей и современных квартир. Полное юридическое сопровождение сделки под ключ.</p>
+                
+                <div class="hero-actions">
+                    <a href="#catalog" class="btn btn-gold">Смотреть каталог объектов</a>
+                    <a href="#calculator" class="btn btn-glass">Рассчитать ипотеку 📐</a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <strong id="statCount">18+</strong>
+                        <span>Объектов на продаже</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>100%</strong>
+                        <span>Юр. чистота объектов</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>от 6%</strong>
+                        <span>Семейная и IT ипотека</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ИНТЕРАКТИВНАЯ ПАНЕЛЬ ПОИСКА И ФИЛЬТРОВ -->
+    <div class="container search-wrapper">
+        <div class="search-bar anim-reveal">
+            <div class="search-field search-text">
+                <label for="searchQuery">Быстрый поиск</label>
+                <div class="input-with-icon">
+                    <span>🔍</span>
+                    <input type="text" id="searchQuery" placeholder="Название, улица, район...">
+                </div>
+            </div>
+
+            <div class="search-field">
+                <label for="filterType">Тип жилья</label>
+                <select id="filterType">
+                    <option value="all">Все категории</option>
+                    <option value="Дом">Дома и коттеджи</option>
+                    <option value="Квартира">Квартиры</option>
+                    <option value="Таунхаус">Таунхаусы</option>
+                </select>
+            </div>
+
+            <div class="search-field">
+                <label for="filterRooms">Комнатность</label>
+                <select id="filterRooms">
+                    <option value="all">Любое число</option>
+                    <option value="1">1 комната</option>
+                    <option value="2">2 комнаты</option>
+                    <option value="3">3 комнаты</option>
+                    <option value="4+">4+ комнаты</option>
+                </select>
+            </div>
+
+            <div class="search-field">
+                <label for="filterSort">Сортировка</label>
+                <select id="filterSort">
+                    <option value="default">Сначала популярные</option>
+                    <option value="price-asc">Цена: по возрастанию</option>
+                    <option value="price-desc">Цена: по убыванию</option>
+                    <option value="area-desc">По площади (м²)</option>
+                </select>
+            </div>
+
+            <div class="search-btn-col">
+                <button class="btn btn-gold btn-block" onclick="applyFilters()">Применить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- КАТАЛОГ ОБЪЕКТОВ -->
+    <section class="section catalog-section" id="catalog">
+        <div class="container">
+            <div class="section-header anim-reveal">
+                <div class="section-tag">АКТУАЛЬНАЯ БАЗА</div>
+                <h2>Эксклюзивные предложения</h2>
+                <p>Все объекты проверены на юридическую чистоту и готовы к быстрому выходу на сделку</p>
+            </div>
+
+            <!-- Сетка карточек -->
+            <div class="properties-grid" id="propertiesCatalog">
+                <!-- Рендерится через JavaScript -->
+            </div>
+
+            <div class="catalog-empty-notice" id="catalogEmpty" style="display: none;">
+                <div class="empty-icon">🏠</div>
+                <h3>По вашему запросу ничего не найдено</h3>
+                <p>Попробуйте сбросить параметры фильтра или напишите нам для персонального закрытого подбора.</p>
+                <button class="btn btn-outline" onclick="resetFilters()">Сбросить фильтры</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ИПОТЕЧНЫЙ КАЛЬКУЛЯТОР -->
+    <section class="section calculator-section" id="calculator">
+        <div class="container">
+            <div class="section-header anim-reveal">
+                <div class="section-tag">ФИНАНСЫ И РАСЧЕТ</div>
+                <h2>Ипотечный калькулятор</h2>
+                <p>Узнайте ориентировочный ежемесячный платёж за 1 минуту</p>
+            </div>
+
+            <div class="calc-card anim-reveal">
+                <div class="calc-inputs">
+                    <div class="calc-group">
+                        <div class="calc-label-row">
+                            <label>Стоимость недвижимости</label>
+                            <span class="calc-val-display" id="calcPriceDisplay">8 000 000 ₽</span>
+                        </div>
+                        <input type="range" id="calcPrice" min="2000000" max="30000000" step="100000" value="8000000">
+                    </div>
+
+                    <div class="calc-group">
+                        <div class="calc-label-row">
+                            <label>Первоначальный взнос (20%)</label>
+                            <span class="calc-val-display" id="calcInitialDisplay">1 600 000 ₽</span>
+                        </div>
+                        <input type="range" id="calcInitial" min="10" max="80" step="5" value="20">
+                    </div>
+
+                    <div class="calc-grid-two">
+                        <div class="calc-group">
+                            <div class="calc-label-row">
+                                <label>Срок кредита</label>
+                                <span class="calc-val-display" id="calcYearsDisplay">20 лет</span>
+                            </div>
+                            <input type="range" id="calcYears" min="1" max="30" step="1" value="20">
+                        </div>
+
+                        <div class="calc-group">
+                            <div class="calc-label-row">
+                                <label>Ставка по ипотеке</label>
+                                <span class="calc-val-display" id="calcRateDisplay">6%</span>
+                            </div>
+                            <input type="range" id="calcRate" min="4" max="22" step="0.5" value="6">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-result">
+                    <div class="result-title">Ежемесячный платёж</div>
+                    <div class="result-sum" id="monthlyPayment">45 850 ₽</div>
+                    
+                    <div class="result-details">
+                        <div class="result-row">
+                            <span>Сумма кредита:</span>
+                            <strong id="loanAmount">6 400 000 ₽</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Необходимый доход:</span>
+                            <strong id="requiredIncome">~75 000 ₽</strong>
+                        </div>
+                    </div>
+
+                    <a href="#booking" class="btn btn-gold btn-block" onclick="prefillMortgage()">Подать заявку на ипотеку</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРЕИМУЩЕСТВА РАБОТЫ -->
+    <section class="section services-section" id="services">
+        <div class="container">
+            <div class="section-header anim-reveal">
+                <div class="section-tag">ПОЧЕМУ МЫ</div>
+                <h2>Стандарты работы премиум-класса</h2>
+                <p>Экономим ваше время, нервы и бюджет на всех этапах покупки или продажи</p>
+            </div>
+
+            <div class="services-grid anim-reveal">
+                <div class="service-card">
+                    <div class="service-num">01</div>
+                    <h3>Юридическая экспертиза</h3>
+                    <p>Проверка объекта по 27 пунктам: аресты, банкротства, маткапитал, зарегистрированные лица и история переходов права.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-num">02</div>
+                    <h3>Одобрение ипотеки</h3>
+                    <p>Партнёрские преференции в ведущих банках. Помощь в сложных ситуациях, субсидированные ставки от 6%.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-num">03</div>
+                    <h3>Безопасные расчёты</h3>
+                    <p>Сделки через банковские эскроу-счета, аккредитивы или депозиты нотариуса. Перевод денег только после регистрации в Росреестре.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-num">04</div>
+                    <h3>Полная конфиденциальность</h3>
+                    <p>Работа с закрытыми базами данных элитных объектов. Никакого спама и передачи ваших контактных данных третьим лицам.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ОТЗЫВЫ ДОВОЛЬНЫХ КЛИЕНТОВ -->
+    <section class="section reviews-section" id="reviews">
+        <div class="container">
+            <div class="section-header anim-reveal">
+                <div class="section-tag">ДОВЕРИЕ</div>
+                <h2>Что говорят наши клиенты</h2>
+                <p>Реальные истории семей, нашедших дом мечты в Армавире</p>
+            </div>
+
+            <div class="reviews-grid anim-reveal">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Искали дом родителям в черте города. Благодаря риелтору нашли потрясающий вариант в пос. Заветный, сэкономили 400 тыс. при торге. Оформили за 4 дня!»</p>
+                    <div class="review-author">
+                        <div class="author-avatar">АС</div>
+                        <div>
+                            <strong>Александр Сергеев</strong>
+                            <small>Купил коттедж 160 м²</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Огромная благодарность за быструю продажу нашей 3-комнатной квартиры и одновременную покупку нового дома. Сделка была сложной, с ипотекой, но всё прошло идеально.»</p>
+                    <div class="review-author">
+                        <div class="author-avatar">ЕК</div>
+                        <div>
+                            <strong>Елена Ковалёва</strong>
+                            <small>Альтернативная сделка</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Помогли одобрить льготную IT-ипотеку, когда в двух банках пришел предварительный отказ. Честный и открытый подход без навязывания лишних страховок.»</p>
+                    <div class="review-author">
+                        <div class="author-avatar">ДМ</div>
+                        <div>
+                            <strong>Дмитрий Мельников</strong>
+                            <small>Купил квартиру в ЖК «Центральный»</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ФОРМА БРОНИРОВАНИЯ И СВЯЗИ -->
+    <section class="section booking-section" id="booking">
+        <div class="container">
+            <div class="booking-card anim-reveal">
+                <div class="booking-info">
+                    <div>
+                        <span class="badge-gold">ОПЕРАТИВНАЯ СВЯЗЬ</span>
+                        <h2>Запишитесь на просмотр или консультацию</h2>
+                        <p>Оставьте свои контакты. Заявка моментально придет на телефон риелтора в Telegram, и мы свяжемся с вами в течение 10 минут.</p>
+
+                        <div class="booking-contact-list">
+                            <div class="b-contact-item">
+                                <span class="b-icon">📞</span>
+                                <div>
+                                    <small>Телефон риелтора</small>
+                                    <strong>+7 (918) 266-40-60</strong>
+                                </div>
+                            </div>
+                            <div class="b-contact-item">
+                                <span class="b-icon">📍</span>
+                                <div>
+                                    <small>Офис в Армавире</small>
+                                    <strong>ул. Кирова, 48 (БЦ «Плаза»)</strong>
+                                </div>
+                            </div>
+                            <div class="b-contact-item">
+                                <span class="b-icon">⏰</span>
+                                <div>
+                                    <small>Режим работы</small>
+                                    <strong>Пн–Вс с 09:00 до 21:00</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="booking-socials">
+                        <span>Связаться напрямую:</span>
+                        <div class="social-btn-group">
+                            <a href="https://wa.me/79182664060" target="_blank" class="s-btn wa">WhatsApp</a>
+                            <a href="https://t.me/drazzex" target="_blank" class="s-btn tg">Telegram</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-form-wrap">
+                    <h3>Заполните заявку</h3>
+                    <form id="realtorForm">
+                        <div class="form-group">
+                            <label for="clientName">Ваше имя</label>
+                            <input type="text" id="clientName" placeholder="Александр" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clientPhone">Номер телефона</label>
+                            <input type="tel" id="clientPhone" placeholder="+7 (___) ___-__-__" maxlength="18" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="propertySelect">Интересующий объект / Услуга</label>
+                            <select id="propertySelect">
+                                <!-- Заполняется динамически из базы -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clientComment">Комментарий или пожелания</label>
+                            <textarea id="clientComment" rows="3" placeholder="Например: удобен просмотр в субботу после 15:00..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-gold btn-block" id="submitLeadBtn">
+                            Отправить заявку риелтору 🚀
+                        </button>
+                        <p class="form-privacy">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ (FOOTER) -->
+    <footer class="footer" id="contacts">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <div class="logo">
+                    <div class="logo-mark">ПН</div>
+                    <div class="logo-copy">
+                        <span class="logo-title">ПРЕСТИЖ</span>
+                        <span class="logo-sub">НЕДВИЖИМОСТЬ</span>
+                    </div>
+                </div>
+                <p class="footer-desc">Сервис купли-продажи жилой и коммерческой недвижимости в Армавире и Краснодарском крае.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Навигация</h4>
+                <ul>
+                    <li><a href="#hero">Главная</a></li>
+                    <li><a href="#catalog">Каталог домов и квартир</a></li>
+                    <li><a href="#calculator">Ипотечный калькулятор</a></li>
+                    <li><a href="#services">Стандарты качества</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <p>📍 г. Армавир, ул. Кирова, 48</p>
+                <p>📞 +7 (918) 266-40-60</p>
+                <p>✉️ vadimcmoz@gmail.com</p>
+                <button class="footer-admin-link" onclick="openAdminModal()">Панель управления (CMS)</button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2027 Недвижимость. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ПЛАВАЮЩАЯ КНОПКА СВЯЗИ -->
+    <div class="quick-contact">
+        <a href="https://wa.me/79182664060" target="_blank" class="quick-wa-btn" title="Написать в WhatsApp">
+            <span>💬</span>
+        </a>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДЕТАЛЬНОГО ПРОСМОТРА ОБЪЕКТА -->
+    <div class="modal-backdrop" id="propDetailsModal">
+        <div class="modal-dialog">
+            <button class="modal-close" onclick="closeDetailsModal()">&times;</button>
+            <div class="modal-details-body" id="propDetailsContent">
+                <!-- Заполняется динамически -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ПОЛНОЦЕННАЯ АДМИН-ПАНЕЛЬ (CMS БЕЗ КОДА) -->
+    <div class="modal-backdrop" id="adminModal">
+        <div class="modal-dialog admin-dialog">
+            <div class="admin-header">
+                <div class="admin-header-title">
+                    <span class="admin-badge">CMS</span>
+                    <h3>Управление объектами недвижимости</h3>
+                </div>
+                <button class="modal-close" onclick="closeAdminModal()">&times;</button>
+            </div>
+
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="switchAdminTab('tab-add')">➕ Добавить объект</button>
+                <button class="admin-tab" onclick="switchAdminTab('tab-list')">📋 Список объявлений (<span id="adminListCount">0</span>)</button>
+                <button class="admin-tab" onclick="switchAdminTab('tab-backup')">💾 Резервная копия (JSON)</button>
+            </div>
+
+            <div class="admin-body">
+                <!-- Вкладка 1: Добавить / Редактировать -->
+                <div class="admin-tab-content active" id="tab-add">
+                    <form id="adminPropForm" onsubmit="handleSaveProperty(event)">
+                        <input type="hidden" id="adminEditId" value="">
+                        
+                        <div class="form-row-2">
+                            <div class="form-group">
+                                <label>Заголовок объявления *</label>
+                                <input type="text" id="admTitle" placeholder="Напр.: Вилла с панорамным бассейном" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Тип недвижимости *</label>
+                                <select id="admType">
+                                    <option value="Дом">Дом / Коттедж</option>
+                                    <option value="Квартира">Квартира</option>
+                                    <option value="Таунхаус">Таунхаус</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row-3">
+                            <div class="form-group">
+                                <label>Цена (в рублях) *</label>
+                                <input type="number" id="admPrice" placeholder="12500000" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Площадь (м²) *</label>
+                                <input type="number" id="admArea" placeholder="185" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Количество комнат *</label>
+                                <input type="number" id="admRooms" placeholder="4" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row-2">
+                            <div class="form-group">
+                                <label>Точный адрес / Район *</label>
+                                <input type="text" id="admLocation" placeholder="г. Армавир, ул. Кирова, 12" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Ссылка на фото (URL) *</label>
+                                <input type="text" id="admImage" placeholder="https://images.unsplash.com/..." required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Подробное описание объекта *</label>
+                            <textarea id="admDesc" rows="4" placeholder="Опишите планировку, ремонт, коммуникации, благоустройство двора..." required></textarea>
+                        </div>
+
+                        <div class="admin-form-footer">
+                            <button type="submit" class="btn btn-gold" id="admSubmitBtn">Опубликовать на сайте 🌟</button>
+                            <button type="button" class="btn btn-outline" onclick="resetAdminForm()">Очистить форму</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Вкладка 2: Список и управление -->
+                <div class="admin-tab-content" id="tab-list">
+                    <div class="admin-items-table" id="adminItemsList">
+                        <!-- Вывод объектов для редактирования и удаления -->
+                    </div>
+                </div>
+
+                <!-- Вкладка 3: Резервное копирование -->
+                <div class="admin-tab-content" id="tab-backup">
+                    <div class="backup-box">
+                        <h4>Экспорт и импорт базы объявлений</h4>
+                        <p>Вы можете скачать базу объявлений в файл `.json`, чтобы сохранить ее или загрузить на другой компьютер без потери данных.</p>
+                        
+                        <div class="backup-actions">
+                            <button class="btn btn-gold" onclick="exportDataToFile()">📥 Скачать базу данных (JSON)</button>
+                            <button class="btn btn-outline" onclick="document.getElementById('importFileInput').click()">📤 Загрузить из файла (JSON)</button>
+                            <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importDataFromFile(event)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ (TOAST) -->
+    <div class="toast-notification" id="toastBox">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message" id="toastMessage">Уведомление</span>
+    </div>
+
+    <!-- Подключение JS -->
+    <script src="script.js"></script>
+</body>
+</html>
