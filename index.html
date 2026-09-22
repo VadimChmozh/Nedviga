@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Недвижимость — дома и квартиры в Армавире</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>АРМАВИР Недвижимость — Элитные дома и квартиры в Армавире</title>
     <!-- Шрифты Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <!-- ВЕРХНЯЯ ИНФО-ПОЛОСА -->
+    <!-- ВЕРХНЯЯ ИНФО-ПОЛОСА (скрывается на телефонах для компактности) -->
     <div class="top-bar">
         <div class="container top-bar-container">
             <div class="top-bar-left">
@@ -28,9 +28,10 @@
         </div>
     </div>
 
-    <!-- ОСНОВНАЯ ШАПКА -->
+    <!-- ОСНОВНАЯ ШАПКА (ИДЕАЛЬНО АДАПТИРОВАНА ПОД МОБИЛЬНЫЕ) -->
     <header class="header" id="header">
         <div class="container header-container">
+            <!-- Логотип (масштабируется на смартфонах) -->
             <a href="#" class="logo">
                 <div class="logo-mark">OOO</div>
                 <div class="logo-copy">
@@ -39,19 +40,33 @@
                 </div>
             </a>
 
+            <!-- Выезжающее мобильное шторка-меню -->
             <nav class="nav" id="navMenu">
+                <div class="mobile-nav-header">
+                    <span>НАВИГАЦИЯ</span>
+                    <button class="mobile-nav-close" id="mobileNavClose">&times;</button>
+                </div>
                 <ul>
                     <li><a href="#hero" class="nav-link">Главная</a></li>
                     <li><a href="#catalog" class="nav-link">Каталог</a></li>
-                    <li><a href="#services" class="nav-link">Услуги</a></li>
                     <li><a href="#calculator" class="nav-link">Ипотека</a></li>
+                    <li><a href="#services" class="nav-link">Услуги</a></li>
                     <li><a href="#reviews" class="nav-link">Отзывы</a></li>
                     <li><a href="#contacts" class="nav-link">Контакты</a></li>
                 </ul>
+
+                <!-- Блок контактов внутри мобильного меню -->
+                <div class="mobile-menu-contacts">
+                    <a href="tel:+79182664060" class="btn btn-gold btn-block">📞 Позвонить риелтору</a>
+                    <a href="https://wa.me/79182664060" target="_blank" class="btn btn-wa btn-block">💬 Написать в WhatsApp</a>
+                    <button class="admin-mobile-btn" onclick="openAdminModal(); closeMobileNav();">🔐 Панель управления (CMS)</button>
+                </div>
             </nav>
 
+            <!-- Кнопки справа в шапке -->
             <div class="header-actions">
-                <a href="#booking" class="btn btn-primary btn-sm">Заявка на показ</a>
+                <a href="tel:+79182664060" class="header-phone-icon" title="Позвонить">📞</a>
+                <a href="#booking" class="btn btn-primary btn-sm header-cta-desktop">Заявка на показ</a>
                 <button class="burger" id="burgerBtn" aria-label="Открыть меню">
                     <span></span><span></span><span></span>
                 </button>
@@ -59,41 +74,44 @@
         </div>
     </header>
 
+    <!-- Затеменение при открытом мобильном меню -->
+    <div class="nav-backdrop" id="navBackdrop"></div>
+
     <!-- ГЛАВНЫЙ ЭКРАН (HERO) -->
     <section class="hero" id="hero">
         <div class="hero-backdrop"></div>
         <div class="container hero-container">
-            <div class="hero-content anim-reveal">
-                <span class="hero-chip">✨ Персональный подбор без скрытых комиссий</span>
+            <div class="hero-content">
+                <span class="hero-chip">✨ Персональный подбор без комиссий</span>
                 <h1>Недвижимость премиум-класса <span>в Армавире</span></h1>
-                <p>Продажа проверенных загородных домов, элитных коттеджей и современных квартир. Полное юридическое сопровождение сделки под ключ.</p>
+                <p>Продажа проверенных загородных домов, элитных коттеджей и современных квартир. Юридическая чистота под ключ.</p>
                 
                 <div class="hero-actions">
-                    <a href="#catalog" class="btn btn-gold">Смотреть каталог объектов</a>
+                    <a href="#catalog" class="btn btn-gold">Смотреть каталог</a>
                     <a href="#calculator" class="btn btn-glass">Рассчитать ипотеку 📐</a>
                 </div>
 
                 <div class="hero-stats">
                     <div class="stat-item">
                         <strong id="statCount">18+</strong>
-                        <span>Объектов на продаже</span>
+                        <span>Объектов</span>
                     </div>
                     <div class="stat-item">
                         <strong>100%</strong>
-                        <span>Юр. чистота объектов</span>
+                        <span>Юр. чистота</span>
                     </div>
                     <div class="stat-item">
                         <strong>от 6%</strong>
-                        <span>Семейная и IT ипотека</span>
+                        <span>Ипотека</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ИНТЕРАКТИВНАЯ ПАНЕЛЬ ПОИСКА И ФИЛЬТРОВ -->
+    <!-- ИНТЕРАКТИВНАЯ ПАНЕЛЬ ПОИСКА И ФИЛЬТРОВ (АДАПТИВНАЯ) -->
     <div class="container search-wrapper">
-        <div class="search-bar anim-reveal">
+        <div class="search-bar">
             <div class="search-field search-text">
                 <label for="searchQuery">Быстрый поиск</label>
                 <div class="input-with-icon">
@@ -126,15 +144,15 @@
             <div class="search-field">
                 <label for="filterSort">Сортировка</label>
                 <select id="filterSort">
-                    <option value="default">Сначала популярные</option>
-                    <option value="price-asc">Цена: по возрастанию</option>
-                    <option value="price-desc">Цена: по убыванию</option>
-                    <option value="area-desc">По площади (м²)</option>
+                    <option value="default">Популярные</option>
+                    <option value="price-asc">Цена: с дешевых</option>
+                    <option value="price-desc">Цена: с дорогих</option>
+                    <option value="area-desc">По площади</option>
                 </select>
             </div>
 
             <div class="search-btn-col">
-                <button class="btn btn-gold btn-block" onclick="applyFilters()">Применить</button>
+                <button class="btn btn-gold btn-block" onclick="applyFilters()">Найти 🔍</button>
             </div>
         </div>
     </div>
@@ -142,21 +160,20 @@
     <!-- КАТАЛОГ ОБЪЕКТОВ -->
     <section class="section catalog-section" id="catalog">
         <div class="container">
-            <div class="section-header anim-reveal">
+            <div class="section-header">
                 <div class="section-tag">АКТУАЛЬНАЯ БАЗА</div>
                 <h2>Эксклюзивные предложения</h2>
-                <p>Все объекты проверены на юридическую чистоту и готовы к быстрому выходу на сделку</p>
+                <p>Все объекты проверены и готовы к выходу на сделку</p>
             </div>
 
-            <!-- Сетка карточек -->
             <div class="properties-grid" id="propertiesCatalog">
-                <!-- Рендерится через JavaScript -->
+                <!-- Карточки рендерятся через JS -->
             </div>
 
             <div class="catalog-empty-notice" id="catalogEmpty" style="display: none;">
                 <div class="empty-icon">🏠</div>
                 <h3>По вашему запросу ничего не найдено</h3>
-                <p>Попробуйте сбросить параметры фильтра или напишите нам для персонального закрытого подбора.</p>
+                <p>Попробуйте сбросить параметры фильтра или свяжитесь с нами для персонального подбора.</p>
                 <button class="btn btn-outline" onclick="resetFilters()">Сбросить фильтры</button>
             </div>
         </div>
@@ -165,13 +182,13 @@
     <!-- ИПОТЕЧНЫЙ КАЛЬКУЛЯТОР -->
     <section class="section calculator-section" id="calculator">
         <div class="container">
-            <div class="section-header anim-reveal">
+            <div class="section-header">
                 <div class="section-tag">ФИНАНСЫ И РАСЧЕТ</div>
                 <h2>Ипотечный калькулятор</h2>
                 <p>Узнайте ориентировочный ежемесячный платёж за 1 минуту</p>
             </div>
 
-            <div class="calc-card anim-reveal">
+            <div class="calc-card">
                 <div class="calc-inputs">
                     <div class="calc-group">
                         <div class="calc-label-row">
@@ -218,67 +235,67 @@
                             <strong id="loanAmount">6 400 000 ₽</strong>
                         </div>
                         <div class="result-row">
-                            <span>Необходимый доход:</span>
+                            <span>Доход от:</span>
                             <strong id="requiredIncome">~75 000 ₽</strong>
                         </div>
                     </div>
 
-                    <a href="#booking" class="btn btn-gold btn-block" onclick="prefillMortgage()">Подать заявку на ипотеку</a>
+                    <a href="#booking" class="btn btn-gold btn-block" onclick="prefillMortgage()">Заявка на ипотеку</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ПРЕИМУЩЕСТВА РАБОТЫ -->
+    <!-- ПРЕИМУЩЕСТВА -->
     <section class="section services-section" id="services">
         <div class="container">
-            <div class="section-header anim-reveal">
+            <div class="section-header">
                 <div class="section-tag">ПОЧЕМУ МЫ</div>
-                <h2>Стандарты работы премиум-класса</h2>
-                <p>Экономим ваше время, нервы и бюджет на всех этапах покупки или продажи</p>
+                <h2>Стандарты качества</h2>
+                <p>Экономим ваше время и бюджет на всех этапах покупки или продажи</p>
             </div>
 
-            <div class="services-grid anim-reveal">
+            <div class="services-grid">
                 <div class="service-card">
                     <div class="service-num">01</div>
                     <h3>Юридическая экспертиза</h3>
-                    <p>Проверка объекта по 27 пунктам: аресты, банкротства, маткапитал, зарегистрированные лица и история переходов права.</p>
+                    <p>Проверка объекта по 27 пунктам: аресты, банкротства, маткапитал и история переходов права.</p>
                 </div>
 
                 <div class="service-card">
                     <div class="service-num">02</div>
                     <h3>Одобрение ипотеки</h3>
-                    <p>Партнёрские преференции в ведущих банках. Помощь в сложных ситуациях, субсидированные ставки от 6%.</p>
+                    <p>Партнёрские преференции в банках. Помощь в сложных ситуациях, субсидированные ставки от 6%.</p>
                 </div>
 
                 <div class="service-card">
                     <div class="service-num">03</div>
                     <h3>Безопасные расчёты</h3>
-                    <p>Сделки через банковские эскроу-счета, аккредитивы или депозиты нотариуса. Перевод денег только после регистрации в Росреестре.</p>
+                    <p>Сделки через эскроу-счета или аккредитивы. Перевод денег только после регистрации в Росреестре.</p>
                 </div>
 
                 <div class="service-card">
                     <div class="service-num">04</div>
-                    <h3>Полная конфиденциальность</h3>
-                    <p>Работа с закрытыми базами данных элитных объектов. Никакого спама и передачи ваших контактных данных третьим лицам.</p>
+                    <h3>Конфиденциальность</h3>
+                    <p>Работа с закрытыми базами элитных объектов без спама и передачи данных третьим лицам.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ОТЗЫВЫ ДОВОЛЬНЫХ КЛИЕНТОВ -->
+    <!-- ОТЗЫВЫ -->
     <section class="section reviews-section" id="reviews">
         <div class="container">
-            <div class="section-header anim-reveal">
+            <div class="section-header">
                 <div class="section-tag">ДОВЕРИЕ</div>
-                <h2>Что говорят наши клиенты</h2>
-                <p>Реальные истории семей, нашедших дом мечты в Армавире</p>
+                <h2>Отзывы клиентов</h2>
+                <p>Истории семей, нашедших дом своей мечты</p>
             </div>
 
-            <div class="reviews-grid anim-reveal">
+            <div class="reviews-grid">
                 <div class="review-card">
                     <div class="review-stars">★★★★★</div>
-                    <p class="review-text">«Искали дом родителям в черте города. Благодаря риелтору нашли потрясающий вариант в пос. Заветный, сэкономили 400 тыс. при торге. Оформили за 4 дня!»</p>
+                    <p class="review-text">«Искали дом родителям в черте города. Благодаря риелтору нашли вариант в пос. Заветный, сэкономили 400 тыс. при торге. Оформили за 4 дня!»</p>
                     <div class="review-author">
                         <div class="author-avatar">АС</div>
                         <div>
@@ -290,7 +307,7 @@
 
                 <div class="review-card">
                     <div class="review-stars">★★★★★</div>
-                    <p class="review-text">«Огромная благодарность за быструю продажу нашей 3-комнатной квартиры и одновременную покупку нового дома. Сделка была сложной, с ипотекой, но всё прошло идеально.»</p>
+                    <p class="review-text">«Благодарность за быструю продажу 3-комнатной квартиры и покупку дома. Сделка была с ипотекой, всё прошло идеально.»</p>
                     <div class="review-author">
                         <div class="author-avatar">ЕК</div>
                         <div>
@@ -302,12 +319,12 @@
 
                 <div class="review-card">
                     <div class="review-stars">★★★★★</div>
-                    <p class="review-text">«Помогли одобрить льготную IT-ипотеку, когда в двух банках пришел предварительный отказ. Честный и открытый подход без навязывания лишних страховок.»</p>
+                    <p class="review-text">«Помогли одобрить льготную IT-ипотеку, когда в банках пришел отказ. Честный подход без навязывания лишних страховок.»</p>
                     <div class="review-author">
                         <div class="author-avatar">ДМ</div>
                         <div>
                             <strong>Дмитрий Мельников</strong>
-                            <small>Купил квартиру в ЖК «Центральный»</small>
+                            <small>Квартира в ЖК «Центральный»</small>
                         </div>
                     </div>
                 </div>
@@ -318,12 +335,12 @@
     <!-- ФОРМА БРОНИРОВАНИЯ И СВЯЗИ -->
     <section class="section booking-section" id="booking">
         <div class="container">
-            <div class="booking-card anim-reveal">
+            <div class="booking-card">
                 <div class="booking-info">
                     <div>
                         <span class="badge-gold">ОПЕРАТИВНАЯ СВЯЗЬ</span>
-                        <h2>Запишитесь на просмотр или консультацию</h2>
-                        <p>Оставьте свои контакты. Заявка моментально придет на телефон риелтора в Telegram, и мы свяжемся с вами в течение 10 минут.</p>
+                        <h2>Запишитесь на просмотр</h2>
+                        <p>Оставьте свои контакты. Заявка моментально придет риелтору в Telegram, и мы свяжемся с вами в течение 10 минут.</p>
 
                         <div class="booking-contact-list">
                             <div class="b-contact-item">
@@ -340,18 +357,11 @@
                                     <strong>ул. Кирова, 48 (БЦ «Плаза»)</strong>
                                 </div>
                             </div>
-                            <div class="b-contact-item">
-                                <span class="b-icon">⏰</span>
-                                <div>
-                                    <small>Режим работы</small>
-                                    <strong>Пн–Вс с 09:00 до 21:00</strong>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
                     <div class="booking-socials">
-                        <span>Связаться напрямую:</span>
+                        <span>Мессенджеры:</span>
                         <div class="social-btn-group">
                             <a href="https://wa.me/79182664060" target="_blank" class="s-btn wa">WhatsApp</a>
                             <a href="https://t.me/drazzex" target="_blank" class="s-btn tg">Telegram</a>
@@ -375,19 +385,18 @@
                         <div class="form-group">
                             <label for="propertySelect">Интересующий объект / Услуга</label>
                             <select id="propertySelect">
-                                <!-- Заполняется динамически из базы -->
+                                <!-- Заполняется динамически -->
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="clientComment">Комментарий или пожелания</label>
-                            <textarea id="clientComment" rows="3" placeholder="Например: удобен просмотр в субботу после 15:00..."></textarea>
+                            <textarea id="clientComment" rows="3" placeholder="Удобное время для звонка или просмотра..."></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-gold btn-block" id="submitLeadBtn">
-                            Отправить заявку риелтору 🚀
+                            Отправить заявку 🚀
                         </button>
-                        <p class="form-privacy">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
                     </form>
                 </div>
             </div>
@@ -398,23 +407,23 @@
     <footer class="footer" id="contacts">
         <div class="container footer-container">
             <div class="footer-col">
-                <div class="logo">
-                    <div class="logo-mark">ПН</div>
+                <a href="#" class="logo">
+                    <div class="logo-mark">ООО</div>
                     <div class="logo-copy">
-                        <span class="logo-title">ПРЕСТИЖ</span>
+                        <span class="logo-title">АРМАВИР</span>
                         <span class="logo-sub">НЕДВИЖИМОСТЬ</span>
                     </div>
-                </div>
-                <p class="footer-desc">Сервис купли-продажи жилой и коммерческой недвижимости в Армавире и Краснодарском крае.</p>
+                </a>
+                <p class="footer-desc">Купля-продажа жилой и коммерческой недвижимости в Армавире и Краснодарском крае.</p>
             </div>
 
             <div class="footer-col">
                 <h4>Навигация</h4>
                 <ul>
                     <li><a href="#hero">Главная</a></li>
-                    <li><a href="#catalog">Каталог домов и квартир</a></li>
-                    <li><a href="#calculator">Ипотечный калькулятор</a></li>
-                    <li><a href="#services">Стандарты качества</a></li>
+                    <li><a href="#catalog">Каталог</a></li>
+                    <li><a href="#calculator">Ипотека</a></li>
+                    <li><a href="#services">Услуги</a></li>
                 </ul>
             </div>
 
@@ -428,47 +437,46 @@
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <p>© 2027 Недвижимость. Все права защищены.</p>
+                <p>© 2027 АРМАВИР Недвижимость. Все права защищены.</p>
             </div>
         </div>
     </footer>
 
-    <!-- ПЛАВАЮЩАЯ КНОПКА СВЯЗИ -->
+    <!-- ПЛАВАЮЩАЯ КНОПКА WHATSAPP -->
     <div class="quick-contact">
         <a href="https://wa.me/79182664060" target="_blank" class="quick-wa-btn" title="Написать в WhatsApp">
             <span>💬</span>
         </a>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО ДЕТАЛЬНОГО ПРОСМОТРА ОБЪЕКТА -->
+    <!-- МОДАЛЬНОЕ ОКНО ДЕТАЛЕЙ ОБЪЕКТА -->
     <div class="modal-backdrop" id="propDetailsModal">
         <div class="modal-dialog">
             <button class="modal-close" onclick="closeDetailsModal()">&times;</button>
             <div class="modal-details-body" id="propDetailsContent">
-                <!-- Заполняется динамически -->
+                <!-- Заполняется JS -->
             </div>
         </div>
     </div>
 
-    <!-- ПОЛНОЦЕННАЯ АДМИН-ПАНЕЛЬ (CMS БЕЗ КОДА) -->
+    <!-- АДМИН-ПАНЕЛЬ (CMS) -->
     <div class="modal-backdrop" id="adminModal">
         <div class="modal-dialog admin-dialog">
             <div class="admin-header">
                 <div class="admin-header-title">
                     <span class="admin-badge">CMS</span>
-                    <h3>Управление объектами недвижимости</h3>
+                    <h3>Управление объектами</h3>
                 </div>
                 <button class="modal-close" onclick="closeAdminModal()">&times;</button>
             </div>
 
             <div class="admin-tabs">
-                <button class="admin-tab active" onclick="switchAdminTab('tab-add')">➕ Добавить объект</button>
-                <button class="admin-tab" onclick="switchAdminTab('tab-list')">📋 Список объявлений (<span id="adminListCount">0</span>)</button>
-                <button class="admin-tab" onclick="switchAdminTab('tab-backup')">💾 Резервная копия (JSON)</button>
+                <button class="admin-tab active" onclick="switchAdminTab('tab-add')">➕ Добавить</button>
+                <button class="admin-tab" onclick="switchAdminTab('tab-list')">📋 Список (<span id="adminListCount">0</span>)</button>
+                <button class="admin-tab" onclick="switchAdminTab('tab-backup')">💾 Резервная копия</button>
             </div>
 
             <div class="admin-body">
-                <!-- Вкладка 1: Добавить / Редактировать -->
                 <div class="admin-tab-content active" id="tab-add">
                     <form id="adminPropForm" onsubmit="handleSaveProperty(event)">
                         <input type="hidden" id="adminEditId" value="">
@@ -476,7 +484,7 @@
                         <div class="form-row-2">
                             <div class="form-group">
                                 <label>Заголовок объявления *</label>
-                                <input type="text" id="admTitle" placeholder="Напр.: Вилла с панорамным бассейном" required>
+                                <input type="text" id="admTitle" placeholder="Вилла с панорамным бассейном" required>
                             </div>
                             <div class="form-group">
                                 <label>Тип недвижимости *</label>
@@ -490,7 +498,7 @@
 
                         <div class="form-row-3">
                             <div class="form-group">
-                                <label>Цена (в рублях) *</label>
+                                <label>Цена (руб) *</label>
                                 <input type="number" id="admPrice" placeholder="12500000" required>
                             </div>
                             <div class="form-group">
@@ -498,50 +506,48 @@
                                 <input type="number" id="admArea" placeholder="185" required>
                             </div>
                             <div class="form-group">
-                                <label>Количество комнат *</label>
+                                <label>Комнат *</label>
                                 <input type="number" id="admRooms" placeholder="4" required>
                             </div>
                         </div>
 
                         <div class="form-row-2">
                             <div class="form-group">
-                                <label>Точный адрес / Район *</label>
+                                <label>Точный адрес *</label>
                                 <input type="text" id="admLocation" placeholder="г. Армавир, ул. Кирова, 12" required>
                             </div>
                             <div class="form-group">
-                                <label>Ссылка на фото (URL) *</label>
+                                <label>Ссылка на фото *</label>
                                 <input type="text" id="admImage" placeholder="https://images.unsplash.com/..." required>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label>Подробное описание объекта *</label>
-                            <textarea id="admDesc" rows="4" placeholder="Опишите планировку, ремонт, коммуникации, благоустройство двора..." required></textarea>
+                            <label>Описание объекта *</label>
+                            <textarea id="admDesc" rows="4" placeholder="Опишите планировку, ремонт, коммуникации..." required></textarea>
                         </div>
 
                         <div class="admin-form-footer">
-                            <button type="submit" class="btn btn-gold" id="admSubmitBtn">Опубликовать на сайте 🌟</button>
-                            <button type="button" class="btn btn-outline" onclick="resetAdminForm()">Очистить форму</button>
+                            <button type="submit" class="btn btn-gold" id="admSubmitBtn">Опубликовать 🌟</button>
+                            <button type="button" class="btn btn-outline" onclick="resetAdminForm()">Очистить</button>
                         </div>
                     </form>
                 </div>
 
-                <!-- Вкладка 2: Список и управление -->
                 <div class="admin-tab-content" id="tab-list">
                     <div class="admin-items-table" id="adminItemsList">
-                        <!-- Вывод объектов для редактирования и удаления -->
+                        <!-- Вывод объектов -->
                     </div>
                 </div>
 
-                <!-- Вкладка 3: Резервное копирование -->
                 <div class="admin-tab-content" id="tab-backup">
                     <div class="backup-box">
                         <h4>Экспорт и импорт базы объявлений</h4>
-                        <p>Вы можете скачать базу объявлений в файл `.json`, чтобы сохранить ее или загрузить на другой компьютер без потери данных.</p>
+                        <p>Вы можете скачать базу объявлений в файл `.json`, чтобы сохранить ее или загрузить на другой компьютер.</p>
                         
                         <div class="backup-actions">
-                            <button class="btn btn-gold" onclick="exportDataToFile()">📥 Скачать базу данных (JSON)</button>
-                            <button class="btn btn-outline" onclick="document.getElementById('importFileInput').click()">📤 Загрузить из файла (JSON)</button>
+                            <button class="btn btn-gold" onclick="exportDataToFile()">📥 Скачать базу (JSON)</button>
+                            <button class="btn btn-outline" onclick="document.getElementById('importFileInput').click()">📤 Загрузить (JSON)</button>
                             <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importDataFromFile(event)">
                         </div>
                     </div>
@@ -550,7 +556,7 @@
         </div>
     </div>
 
-    <!-- ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ (TOAST) -->
+    <!-- ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ -->
     <div class="toast-notification" id="toastBox">
         <span class="toast-icon">✓</span>
         <span class="toast-message" id="toastMessage">Уведомление</span>

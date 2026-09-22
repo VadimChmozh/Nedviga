@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             area: 240,
             rooms: 5,
             img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-            desc: "Авторский проект загородной резиденции с ландшафтным дизайном, подогреваемым бассейном и зоной BBQ. Итальянская мебель, премиальная техника Miele. Полная готовность к заселению."
+            desc: "Авторский проект загородной резиденции с ландшафтным дизайном, подогреваемым бассейном и зоной BBQ. Итальянская мебель, техника Miele. Готов к заселению."
         },
         {
             id: 'prop-2',
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             area: 96,
             rooms: 3,
             img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
-            desc: "Видовой пентхаус на верхнем этаже нового клубного дома. Витражное остекление, индивидуальное отопление, дизайнерская отделка в стиле неоклассика. Подземный паркинг включен."
+            desc: "Видовой пентхаус на верхнем этаже нового клубного дома. Витражное остекление, индивидуальное отопление, дизайнерская отделка. Паркинг включен."
         },
         {
             id: 'prop-3',
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             area: 165,
             rooms: 4,
             img: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80",
-            desc: "Коттедж с плоской эксплуатируемой кровлей, мастер-спальней и гардеробной. Система «Умный дом», теплые полы по всему периметру, гараж на 2 автомобиля."
+            desc: "Коттедж с плоской эксплуатируемой кровлей, мастер-спальней и гардеробной. Система «Умный дом», теплые полы, гараж на 2 авто."
         },
         {
             id: 'prop-4',
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             area: 64,
             rooms: 2,
             img: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
-            desc: "Стильная квартира со свежим ремонтом из премиальных материалов. Шумоизоляция, встроенная кухня с каменной столешницей, закрытая охраняемая территория."
+            desc: "Стильная квартира со свежим ремонтом. Шумоизоляция, встроенная кухня с каменной столешницей, закрытая охраняемая территория."
         },
         {
             id: 'prop-5',
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             area: 130,
             rooms: 4,
             img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
-            desc: "Двухуровневый таунхаус с собственным приватным двориком. Центральные коммуникации, низкие коммунальные платежи, тихий зеленый район."
+            desc: "Двухуровневый таунхаус с приватным двориком. Центральные коммуникации, низкие коммунальные платежи, тихий зеленый район."
         }
     ];
 
@@ -210,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let result = [...properties];
 
-        // Поиск по названию / адресу
         if (query) {
             result = result.filter(p => 
                 p.title.toLowerCase().includes(query) || 
@@ -219,12 +218,10 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         }
 
-        // Фильтр по типу
         if (type !== 'all') {
             result = result.filter(p => p.type === type);
         }
 
-        // Фильтр по комнатам
         if (rooms !== 'all') {
             if (rooms === '4+') {
                 result = result.filter(p => Number(p.rooms) >= 4);
@@ -233,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Сортировка
         if (sort === 'price-asc') {
             result.sort((a, b) => a.price - b.price);
         } else if (sort === 'price-desc') {
@@ -278,7 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('calcYearsDisplay').textContent = `${years} лет`;
         document.getElementById('calcRateDisplay').textContent = `${rateYear}%`;
 
-        // Формула аннуитета
         const monthlyRate = (rateYear / 12) / 100;
         const totalMonths = years * 12;
 
@@ -359,7 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 6. ОТПРАВКА ЗАЯВОК (БЕЗ VPN: TELEGRAM + EMAIL)
+    // 6. ОТПРАВКА ЗАЯВОК (TELEGRAM + EMAIL)
     // ==========================================================================
     const realtorForm = document.getElementById('realtorForm');
 
@@ -380,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const submitBtn = document.getElementById('submitLeadBtn');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Отправка заявки...';
+            submitBtn.textContent = 'Отправка...';
             submitBtn.disabled = true;
 
             const message = `🏢 НОВАЯ ЗАЯВКА НА НЕДВИЖИМОСТЬ!\n\n` +
@@ -389,7 +384,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             `🏠 Объект: ${propTarget}\n` +
                             `💬 Пожелания: ${comment || 'Не указаны'}`;
 
-            // 1. Telegram с таймаутом
             const sendTelegram = async () => {
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 2500);
@@ -402,13 +396,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         signal: controller.signal
                     });
                 } catch (err) {
-                    console.log('Telegram запрос перенаправлен на почту.');
+                    console.log('TG');
                 } finally {
                     clearTimeout(timeoutId);
                 }
             };
 
-            // 2. Резервная почта FormSubmit
             const sendEmail = async () => {
                 try {
                     await fetch(`https://formsubmit.co/ajax/${BACKUP_EMAIL}`, {
@@ -418,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             'Accept': 'application/json'
                         },
                         body: JSON.stringify({
-                            _subject: '🏢 Новая заявка на недвижимость (Престиж)',
+                            _subject: '🏢 Новая заявка на недвижимость',
                             Клиент: name,
                             Телефон: phone,
                             Объект: propTarget,
@@ -426,13 +419,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         })
                     });
                 } catch (e) {
-                    console.log('Почта обработана');
+                    console.log('Email');
                 }
             };
 
             await Promise.allSettled([sendTelegram(), sendEmail()]);
 
-            alert(`Спасибо, ${name}! Ваша заявка успешно принята. Риелтор свяжется с вами по номеру ${phone} в течение 10–15 минут.`);
+            alert(`Спасибо, ${name}! Ваша заявка успешно принята. Риелтор свяжется с вами по номеру ${phone} в течение 10 минут.`);
             realtorForm.reset();
 
             submitBtn.textContent = originalText;
@@ -441,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 7. АДМИН-ПАНЕЛЬ (CMS БЕЗ КОДА)
+    // 7. АДМИН-ПАНЕЛЬ (CMS)
     // ==========================================================================
     window.openAdminModal = () => {
         const pass = prompt('Введите пароль администратора:', 'admin');
@@ -509,20 +502,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const desc = document.getElementById('admDesc').value.trim();
 
         if (editId) {
-            // Редактирование
             const idx = properties.findIndex(p => p.id === editId);
             if (idx !== -1) {
                 properties[idx] = { id: editId, title, type, price, area, rooms, location, img, desc };
-                showToast('Объявление успешно обновлено!');
+                showToast('Объявление обновлено!');
             }
         } else {
-            // Новое объявление
             const newObj = {
                 id: 'prop-' + Date.now(),
                 title, type, price, area, rooms, location, img, desc
             };
             properties.unshift(newObj);
-            showToast('Новый объект успешно опубликован!');
+            showToast('Новый объект опубликован!');
         }
 
         saveToStorage();
@@ -531,7 +522,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderAdminItems();
         resetAdminForm();
 
-        // Переключаем на список
         document.querySelectorAll('.admin-tab')[1].click();
     };
 
@@ -570,10 +560,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.resetAdminForm = () => {
         document.getElementById('adminPropForm').reset();
         document.getElementById('adminEditId').value = '';
-        document.getElementById('admSubmitBtn').textContent = 'Опубликовать на сайте 🌟';
+        document.getElementById('admSubmitBtn').textContent = 'Опубликовать 🌟';
     };
 
-    // Экспорт в JSON
     window.exportDataToFile = () => {
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(properties, null, 2));
         const downloadAnchor = document.createElement('a');
@@ -582,10 +571,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(downloadAnchor);
         downloadAnchor.click();
         downloadAnchor.remove();
-        showToast('Файл базы данных успешно сохранен!');
+        showToast('База данных скачана!');
     };
 
-    // Импорт из JSON
     window.importDataFromFile = (event) => {
         const file = event.target.files[0];
         if (!file) return;
@@ -600,19 +588,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     renderCatalog(properties);
                     updateSelectOptions();
                     renderAdminItems();
-                    showToast('База данных успешно импортирована!');
+                    showToast('База импортирована!');
                 } else {
                     alert('Неверный формат базы данных!');
                 }
             } catch (err) {
-                alert('Ошибка чтения файла JSON!');
+                alert('Ошибка чтения файла!');
             }
         };
         reader.readAsText(file);
     };
 
     // ==========================================================================
-    // 8. ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ (TOAST, BURGER, МОБИЛЬНОЕ МЕНЮ)
+    // 8. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ И ШТОРКОЙ
     // ==========================================================================
     function showToast(text) {
         const toast = document.getElementById('toastBox');
@@ -621,27 +609,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
         msg.textContent = text;
         toast.classList.add('active');
-        setTimeout(() => toast.classList.remove('active'), 3200);
+        setTimeout(() => toast.classList.remove('active'), 3000);
     }
 
     const burgerBtn = document.getElementById('burgerBtn');
     const navMenu = document.getElementById('navMenu');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navBackdrop = document.getElementById('navBackdrop');
+    const mobileNavClose = document.getElementById('mobileNavClose');
 
-    if (burgerBtn && navMenu) {
+    window.closeMobileNav = () => {
+        if (navMenu) navMenu.classList.remove('active');
+        if (burgerBtn) burgerBtn.classList.remove('active');
+        if (navBackdrop) navBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    window.openMobileNav = () => {
+        if (navMenu) navMenu.classList.add('active');
+        if (burgerBtn) burgerBtn.classList.add('active');
+        if (navBackdrop) navBackdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+
+    if (burgerBtn) {
         burgerBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            burgerBtn.classList.toggle('active');
-        });
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                burgerBtn.classList.remove('active');
-            });
+            if (navMenu.classList.contains('active')) {
+                window.closeMobileNav();
+            } else {
+                window.openMobileNav();
+            }
         });
     }
 
-    // Старт проекта
+    if (mobileNavClose) {
+        mobileNavClose.addEventListener('click', window.closeMobileNav);
+    }
+
+    if (navBackdrop) {
+        navBackdrop.addEventListener('click', window.closeMobileNav);
+    }
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', window.closeMobileNav);
+    });
+
+    // Запуск сайта
     initDatabase();
 });
