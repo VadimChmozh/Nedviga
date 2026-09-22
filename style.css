@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ПЕРЕМЕННЫЕ И ДИЗАЙН-СИСТЕМА (ПРЕСТИЖ НЕДВИЖИМОСТЬ)
+   СБРОС И БАЗОВАЯ ДИЗАЙН-СИСТЕМА
    ========================================================================== */
 :root {
     --primary-dark: #090e17;
@@ -7,7 +7,6 @@
     --primary-surface: #1e293b;
     --accent-gold: #c59b27;
     --accent-gold-light: #e5b842;
-    --accent-gold-dark: #9a781b;
     --text-main: #0f172a;
     --text-muted: #64748b;
     --bg-light: #f8fafc;
@@ -19,10 +18,11 @@
     --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.05);
     --shadow-hover: 0 20px 45px rgba(15, 23, 42, 0.12);
     --shadow-gold: 0 10px 25px rgba(197, 155, 39, 0.25);
-    --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-* {
+/* Сброс и запрет случайного горизонтального скролла */
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -31,6 +31,9 @@
 
 html {
     scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 body {
@@ -38,21 +41,25 @@ body {
     color: var(--text-main);
     background-color: var(--bg-light);
     line-height: 1.6;
+    width: 100%;
+    max-width: 100vw;
     overflow-x: hidden;
+    position: relative;
 }
 
-h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
+h1, h2, h3, h4, .btn, .logo-title, .section-tag, .stat-item strong, .result-sum {
     font-family: 'Montserrat', sans-serif;
 }
 
 .container {
+    width: 100%;
     max-width: 1240px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 24px;
 }
 
 .section {
-    padding: 90px 0;
+    padding: 85px 0;
     position: relative;
 }
 
@@ -71,13 +78,12 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     cursor: pointer;
     border: none;
     transition: var(--transition);
-    position: relative;
     text-align: center;
 }
 
 .btn-sm {
-    padding: 10px 22px;
-    font-size: 0.88rem;
+    padding: 10px 20px;
+    font-size: 0.85rem;
 }
 
 .btn-gold {
@@ -113,7 +119,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .btn-glass {
     background: rgba(255, 255, 255, 0.15);
     color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     backdrop-filter: blur(10px);
 }
 
@@ -139,7 +145,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 /* ==========================================================================
-   ВЕРХНЯЯ ПОЛОСА (TOP BAR)
+   ТОП БАР (ПК ВЕРСИЯ)
    ========================================================================== */
 .top-bar {
     background-color: var(--primary-dark);
@@ -175,11 +181,6 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     color: #ffffff;
     text-decoration: none;
     font-weight: 600;
-    transition: var(--transition);
-}
-
-.top-bar-right a:hover {
-    color: var(--accent-gold-light);
 }
 
 .admin-quick-btn {
@@ -191,23 +192,17 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     font-size: 0.78rem;
     font-weight: 700;
     cursor: pointer;
-    transition: var(--transition);
-}
-
-.admin-quick-btn:hover {
-    background: var(--accent-gold);
-    color: #ffffff;
 }
 
 /* ==========================================================================
-   ШАПКА (HEADER) — ОПТИМИЗИРОВАНА ДЛЯ ВСЕХ УСТРОЙСТВ
+   ШАПКА (HEADER)
    ========================================================================== */
 .header {
     position: sticky;
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     z-index: 1000;
@@ -219,10 +214,9 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 76px;
+    height: 74px;
 }
 
-/* Логотип */
 .logo {
     display: flex;
     align-items: center;
@@ -232,17 +226,17 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 .logo-mark {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     background: linear-gradient(135deg, var(--accent-gold), var(--primary-dark));
     color: #ffffff;
     font-family: 'Montserrat', sans-serif;
     font-weight: 900;
-    font-size: 1rem;
+    font-size: 0.95rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 9px;
+    border-radius: 8px;
     box-shadow: 0 4px 12px rgba(197, 155, 39, 0.25);
     flex-shrink: 0;
 }
@@ -267,29 +261,23 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     letter-spacing: 2px;
 }
 
-/* Меню на десктопе */
-.nav ul {
+.nav-desktop ul {
     display: flex;
     list-style: none;
-    gap: 28px;
+    gap: 26px;
 }
 
 .nav-link {
     text-decoration: none;
     color: var(--primary);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     transition: var(--transition);
-    position: relative;
     padding: 6px 0;
 }
 
 .nav-link:hover {
     color: var(--accent-gold);
-}
-
-.mobile-nav-header, .mobile-menu-contacts {
-    display: none;
 }
 
 .header-actions {
@@ -298,23 +286,28 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     gap: 12px;
 }
 
-.header-phone-icon {
-    display: none;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: rgba(197, 155, 39, 0.15);
-    color: var(--accent-gold);
+.header-phone-btn {
+    display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 6px;
     text-decoration: none;
-    font-size: 1.1rem;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 8px 14px;
+    background: #f1f5f9;
+    border-radius: 30px;
+    transition: var(--transition);
 }
 
-/* Кнопка Бургера */
+.header-phone-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+}
+
 .burger {
     display: none;
-    background: rgba(15, 23, 42, 0.05);
+    background: #f1f5f9;
     border: none;
     width: 42px;
     height: 42px;
@@ -328,36 +321,136 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 .burger span {
-    width: 22px;
-    height: 2.5px;
+    width: 20px;
+    height: 2px;
     background: var(--primary);
     border-radius: 2px;
     transition: var(--transition);
 }
 
-.burger.active span:nth-child(1) {
-    transform: translateY(7.5px) rotate(45deg);
+/* ==========================================================================
+   МОБИЛЬНОЕ ШТОРКА-МЕНЮ (DRAWER СПРАВА)
+   ========================================================================== */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px;
+    max-width: 85vw;
+    height: 100vh;
+    height: 100dvh;
+    background: #0f172a;
+    color: #ffffff;
+    z-index: 2005;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: -10px 0 35px rgba(0, 0, 0, 0.4);
+    transform: translateX(105%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
 }
 
-.burger.active span:nth-child(2) {
-    opacity: 0;
+.mobile-drawer.active {
+    transform: translateX(0);
 }
 
-.burger.active span:nth-child(3) {
-    transform: translateY(-7.5px) rotate(-45deg);
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.nav-backdrop {
-    display: none;
+.drawer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.d-mark {
+    background: var(--accent-gold);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 900;
+}
+
+.drawer-close {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.drawer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px 0;
+}
+
+.drawer-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: var(--transition);
+}
+
+.drawer-link:hover, .drawer-link:active {
+    background: var(--accent-gold);
+}
+
+.drawer-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.drawer-admin-btn {
+    background: none;
+    border: none;
+    color: var(--accent-gold-light);
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-top: 6px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.drawer-backdrop {
     position: fixed;
     inset: 0;
     background: rgba(9, 14, 23, 0.7);
     backdrop-filter: blur(6px);
-    z-index: 1001;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.nav-backdrop.active {
-    display: block;
+.drawer-backdrop.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* ==========================================================================
@@ -365,21 +458,21 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
    ========================================================================== */
 .hero {
     position: relative;
-    padding: 110px 0 140px;
-    background: linear-gradient(135deg, rgba(9, 14, 23, 0.92) 0%, rgba(15, 23, 42, 0.85) 100%),
-                url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat fixed;
+    padding: 100px 0 120px;
+    background: linear-gradient(135deg, rgba(9, 14, 23, 0.94) 0%, rgba(15, 23, 42, 0.88) 100%),
+                url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
     color: #ffffff;
 }
 
 .hero-content {
-    max-width: 800px;
+    max-width: 780px;
 }
 
-.hero-chip {
+.hero-badge {
     display: inline-block;
     padding: 6px 16px;
     background: rgba(197, 155, 39, 0.2);
-    border: 1px solid rgba(197, 155, 39, 0.4);
+    border: 1px solid rgba(197, 155, 39, 0.45);
     color: var(--accent-gold-light);
     border-radius: 30px;
     font-size: 0.82rem;
@@ -388,10 +481,10 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 .hero h1 {
-    font-size: 3.4rem;
+    font-size: 3.2rem;
     font-weight: 900;
     line-height: 1.15;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .hero h1 span {
@@ -399,17 +492,17 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 .hero p {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     color: rgba(255, 255, 255, 0.85);
     margin-bottom: 35px;
-    max-width: 660px;
+    max-width: 640px;
 }
 
 .hero-actions {
     display: flex;
     gap: 14px;
     flex-wrap: wrap;
-    margin-bottom: 50px;
+    margin-bottom: 45px;
 }
 
 .hero-stats {
@@ -421,8 +514,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 
 .stat-item strong {
     display: block;
-    font-size: 1.9rem;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
     color: var(--accent-gold-light);
     line-height: 1;
 }
@@ -433,21 +525,22 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 /* ==========================================================================
-   ПАНЕЛЬ ПОИСКА И ФИЛЬТРОВ
+   ПОИСК И ФИЛЬТРЫ
    ========================================================================== */
-.search-wrapper {
+.search-section {
     position: relative;
-    z-index: 20;
-    margin-top: -55px;
+    z-index: 10;
+    margin-top: -45px;
+    margin-bottom: 40px;
 }
 
-.search-bar {
+.search-card {
     background: #ffffff;
-    padding: 22px 26px;
+    padding: 20px 24px;
     border-radius: var(--radius-lg);
-    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.1);
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.1);
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 130px;
+    grid-template-columns: 2fr 1fr 1fr 1fr 150px;
     gap: 16px;
     align-items: flex-end;
     border: 1px solid var(--border-color);
@@ -458,7 +551,6 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     font-size: 0.75rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
     color: var(--text-muted);
     margin-bottom: 6px;
 }
@@ -478,7 +570,6 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .search-field select:focus, .search-field input:focus {
     border-color: var(--accent-gold);
     background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(197, 155, 39, 0.15);
 }
 
 .input-with-icon {
@@ -490,7 +581,6 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .input-with-icon span {
     position: absolute;
     left: 12px;
-    font-size: 0.9rem;
     color: var(--text-muted);
 }
 
@@ -499,12 +589,12 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 /* ==========================================================================
-   КАТАЛОГ ОБЪЕКТОВ
+   КАТАЛОГ КАРТОЧЕК
    ========================================================================== */
 .section-header {
     text-align: center;
     max-width: 650px;
-    margin: 0 auto 50px;
+    margin: 0 auto 45px;
 }
 
 .section-tag {
@@ -512,7 +602,8 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     font-weight: 800;
     letter-spacing: 2px;
     color: var(--accent-gold);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    display: block;
 }
 
 .section-header h2 {
@@ -520,7 +611,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     font-weight: 900;
     color: var(--primary);
     line-height: 1.2;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .section-header p {
@@ -530,8 +621,8 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 
 .properties-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 28px;
 }
 
 .property-card {
@@ -539,21 +630,21 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: var(--shadow-soft);
-    border: 1.5px solid var(--border-color);
+    border: 1px solid var(--border-color);
     transition: var(--transition);
     display: flex;
     flex-direction: column;
 }
 
 .property-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
     border-color: rgba(197, 155, 39, 0.4);
 }
 
 .card-media {
     position: relative;
-    height: 240px;
+    height: 230px;
     overflow: hidden;
 }
 
@@ -561,17 +652,17 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.6s ease;
 }
 
 .property-card:hover .card-media img {
-    transform: scale(1.06);
+    transform: scale(1.05);
 }
 
 .card-tag {
     position: absolute;
-    top: 14px;
-    left: 14px;
+    top: 12px;
+    left: 12px;
     background: rgba(15, 23, 42, 0.85);
     backdrop-filter: blur(8px);
     color: #ffffff;
@@ -590,7 +681,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 .card-price {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
     font-weight: 900;
     color: var(--primary);
     margin-bottom: 6px;
@@ -598,7 +689,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 .card-title {
-    font-size: 1.18rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: var(--primary);
     margin-bottom: 6px;
@@ -609,9 +700,6 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     font-size: 0.85rem;
     color: var(--text-muted);
     margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
 }
 
 .card-features {
@@ -623,7 +711,6 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     margin-bottom: 18px;
     font-size: 0.88rem;
     font-weight: 600;
-    color: var(--primary-surface);
 }
 
 .card-actions {
@@ -686,7 +773,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .calc-grid-two {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 18px;
+    gap: 16px;
 }
 
 .calc-result {
@@ -710,7 +797,6 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     font-size: 2.5rem;
     font-weight: 900;
     color: var(--accent-gold-light);
-    font-family: 'Montserrat', sans-serif;
     margin-bottom: 20px;
 }
 
@@ -732,13 +818,13 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
    ========================================================================== */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 24px;
 }
 
 .service-card {
     background: #ffffff;
-    padding: 34px 26px;
+    padding: 32px 24px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow-soft);
@@ -746,20 +832,19 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 .service-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-5px);
     border-color: var(--accent-gold);
 }
 
 .service-num {
-    font-size: 1.7rem;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
     font-weight: 900;
     color: var(--accent-gold);
     margin-bottom: 12px;
 }
 
 .service-card h3 {
-    font-size: 1.2rem;
+    font-size: 1.18rem;
     color: var(--primary);
     margin-bottom: 10px;
 }
@@ -778,13 +863,13 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 
 .reviews-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 26px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
 }
 
 .review-card {
     background: var(--bg-light);
-    padding: 30px;
+    padding: 28px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
 }
@@ -798,8 +883,8 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .review-text {
     font-style: italic;
     color: var(--text-main);
-    margin-bottom: 20px;
-    font-size: 0.98rem;
+    margin-bottom: 18px;
+    font-size: 0.96rem;
 }
 
 .review-author {
@@ -809,8 +894,8 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 .author-avatar {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: var(--primary);
     color: #ffffff;
@@ -837,7 +922,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .booking-info {
     background: linear-gradient(135deg, var(--primary-dark), var(--primary));
     color: #ffffff;
-    padding: 48px;
+    padding: 45px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -851,25 +936,25 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     font-size: 0.75rem;
     font-weight: 800;
     display: inline-block;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .booking-info h2 {
     font-size: 2rem;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     line-height: 1.2;
 }
 
 .booking-info p {
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
 .booking-contact-list {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    margin-bottom: 30px;
+    gap: 16px;
+    margin-bottom: 28px;
 }
 
 .b-contact-item {
@@ -879,24 +964,24 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 .b-icon {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .b-contact-item small {
     display: block;
     color: rgba(255, 255, 255, 0.6);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
 }
 
 .b-contact-item strong {
-    font-size: 1rem;
+    font-size: 0.98rem;
 }
 
 .booking-socials span {
@@ -918,29 +1003,28 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     text-decoration: none;
     font-weight: 700;
     font-size: 0.85rem;
-    transition: var(--transition);
 }
 
 .s-btn.wa { background-color: #25D366; }
 .s-btn.tg { background-color: #0088cc; }
 
 .booking-form-wrap {
-    padding: 48px;
+    padding: 45px;
 }
 
 .booking-form-wrap h3 {
     font-size: 1.5rem;
     color: var(--primary);
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
 .form-group {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
 .form-group label {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -949,7 +1033,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 
 .form-group input, .form-group select, .form-group textarea {
     width: 100%;
-    padding: 13px 15px;
+    padding: 12px 14px;
     border: 1.5px solid var(--border-color);
     border-radius: 10px;
     font-size: 0.95rem;
@@ -962,7 +1046,6 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
     border-color: var(--accent-gold);
     background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(197, 155, 39, 0.15);
 }
 
 /* ==========================================================================
@@ -971,18 +1054,18 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .footer {
     background-color: var(--primary-dark);
     color: rgba(255, 255, 255, 0.8);
-    padding-top: 70px;
+    padding-top: 65px;
 }
 
 .footer-container {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 40px;
-    padding-bottom: 50px;
+    padding-bottom: 45px;
 }
 
 .footer-desc {
-    margin-top: 18px;
+    margin-top: 16px;
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.6);
     max-width: 340px;
@@ -991,7 +1074,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .footer-col h4 {
     color: #ffffff;
     font-size: 1.05rem;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
 .footer-col ul {
@@ -1005,7 +1088,6 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .footer-col a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    transition: var(--transition);
     font-size: 0.9rem;
 }
 
@@ -1026,7 +1108,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 22px 0;
+    padding: 20px 0;
     text-align: center;
     font-size: 0.82rem;
     color: rgba(255, 255, 255, 0.5);
@@ -1041,17 +1123,14 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     inset: 0;
     background: rgba(9, 14, 23, 0.85);
     backdrop-filter: blur(10px);
-    z-index: 2000;
+    z-index: 2100;
     justify-content: center;
     align-items: center;
     padding: 16px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
 .modal-backdrop.active {
     display: flex;
-    opacity: 1;
 }
 
 .modal-dialog {
@@ -1067,33 +1146,27 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 
 .modal-close {
     position: absolute;
-    top: 18px;
-    right: 20px;
+    top: 16px;
+    right: 18px;
     background: none;
     border: none;
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--text-muted);
     cursor: pointer;
     z-index: 10;
 }
 
 .admin-dialog {
-    max-width: 920px;
+    max-width: 900px;
 }
 
 .admin-header {
     background: var(--primary-dark);
     color: #ffffff;
-    padding: 22px 28px;
+    padding: 20px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.admin-header-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 .admin-badge {
@@ -1109,7 +1182,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     display: flex;
     gap: 8px;
     background: var(--bg-light);
-    padding: 10px 24px;
+    padding: 10px 20px;
     border-bottom: 1px solid var(--border-color);
     overflow-x: auto;
 }
@@ -1117,24 +1190,22 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .admin-tab {
     background: none;
     border: none;
-    padding: 9px 16px;
+    padding: 8px 14px;
     font-weight: 700;
     cursor: pointer;
     border-radius: 8px;
     color: var(--text-muted);
-    transition: var(--transition);
     white-space: nowrap;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
 }
 
 .admin-tab.active {
     background: #ffffff;
     color: var(--accent-gold);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .admin-body {
-    padding: 28px;
+    padding: 24px;
 }
 
 .admin-tab-content {
@@ -1159,21 +1230,21 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 
 .admin-form-footer {
     display: flex;
-    gap: 12px;
-    margin-top: 20px;
+    gap: 10px;
+    margin-top: 18px;
 }
 
 .admin-items-table {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
 }
 
 .admin-item-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px;
+    padding: 12px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border-color);
     background: var(--bg-light);
@@ -1182,25 +1253,14 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .admin-item-preview {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
 }
 
 .admin-item-preview img {
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
-    border-radius: 8px;
-}
-
-.admin-item-meta strong {
-    display: block;
-    color: var(--primary);
-    font-size: 1rem;
-}
-
-.admin-item-meta span {
-    font-size: 0.82rem;
-    color: var(--text-muted);
+    border-radius: 6px;
 }
 
 .admin-btns-group {
@@ -1209,7 +1269,7 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 }
 
 .btn-ctrl {
-    padding: 7px 12px;
+    padding: 6px 12px;
     border-radius: 6px;
     border: none;
     font-weight: 700;
@@ -1224,45 +1284,45 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 .details-grid {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
-    gap: 26px;
-    padding: 30px;
+    gap: 24px;
+    padding: 26px;
 }
 
 .details-gallery img {
     width: 100%;
-    height: 340px;
+    height: 320px;
     object-fit: cover;
     border-radius: var(--radius-md);
 }
 
 .details-content h3 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: var(--primary);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .details-price {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     color: var(--accent-gold);
     font-weight: 900;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
 .details-spec-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    padding: 14px 0;
+    padding: 12px 0;
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
-    margin-bottom: 18px;
-    font-size: 0.9rem;
+    margin-bottom: 16px;
+    font-size: 0.88rem;
 }
 
 /* TOAST */
 .toast-notification {
     position: fixed;
-    bottom: 24px;
+    bottom: 20px;
     left: 20px;
     background: var(--primary-dark);
     color: #ffffff;
@@ -1298,205 +1358,188 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 
 .quick-contact {
     position: fixed;
-    bottom: 24px;
+    bottom: 20px;
     right: 20px;
     z-index: 999;
 }
 
 .quick-wa-btn {
-    width: 56px;
-    height: 56px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
     background: #25D366;
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     text-decoration: none;
     box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-    transition: var(--transition);
-}
-
-.quick-wa-btn:hover {
-    transform: scale(1.1);
 }
 
 /* ==========================================================================
-   📱 МОБИЛЬНАЯ ОПТИМИЗАЦИЯ (ПЛАНШЕТЫ И ТЕЛЕФОНЫ)
+   📱 ИДЕАЛЬНАЯ АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ УСТРОЙСТВА
    ========================================================================== */
 @media (max-width: 1024px) {
-    .search-bar { grid-template-columns: 1fr 1fr; }
-    .search-btn-col { grid-column: span 2; }
+    .search-card { grid-template-columns: 1fr 1fr; }
+    .search-btn-wrap { grid-column: span 2; }
     .calc-card { grid-template-columns: 1fr; }
     .booking-card { grid-template-columns: 1fr; }
     .footer-container { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
-    /* 1. Скрываем громоздкую верхнюю полосу */
+    /* 1. Убираем лишние полосы, разгружаем шапку */
     .top-bar {
-        display: none;
+        display: none !important;
     }
 
-    /* 2. Компактная фиксированная шапка */
+    .nav-desktop, .header-cta-desktop {
+        display: none !important;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
     .header-container {
-        height: 66px;
+        height: 62px;
     }
 
-    /* Масштабируем логотип под узкие экраны */
+    /* 2. Компактный логотип */
     .logo-mark {
-        width: 36px;
-        height: 36px;
-        font-size: 0.9rem;
-        border-radius: 8px;
+        width: 34px;
+        height: 34px;
+        font-size: 0.85rem;
     }
 
     .logo-title {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
 
     .logo-sub {
-        font-size: 0.55rem;
-        letter-spacing: 1.5px;
+        font-size: 0.52rem;
+        letter-spacing: 1.2px;
     }
 
-    .header-cta-desktop {
+    /* 3. Кнопка звонка и бургер */
+    .header-phone-btn {
+        padding: 6px 10px;
+        font-size: 1rem;
+    }
+
+    .phone-label {
         display: none;
-    }
-
-    .header-phone-icon {
-        display: flex;
     }
 
     .burger {
         display: flex;
     }
 
-    /* 3. Мобильное выезжающее меню-шторка справа */
-    .nav {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 300px;
-        max-width: 85%;
-        height: 100vh;
-        height: 100dvh;
-        background: var(--primary);
-        z-index: 1002;
-        padding: 24px 20px;
-        transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.4);
-        overflow-y: auto;
-    }
-
-    .nav.active {
-        right: 0;
-    }
-
-    .mobile-nav-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        color: var(--accent-gold);
-        font-weight: 800;
-        font-size: 0.8rem;
-        letter-spacing: 1px;
-    }
-
-    .mobile-nav-close {
-        background: none;
-        border: none;
-        color: #ffffff;
-        font-size: 1.8rem;
-        cursor: pointer;
-        line-height: 1;
-    }
-
-    .nav ul {
-        flex-direction: column;
-        gap: 16px;
-        padding: 20px 0;
-    }
-
-    .nav-link {
-        color: #ffffff;
-        font-size: 1.15rem;
-        font-weight: 700;
-        display: block;
-        padding: 8px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .mobile-menu-contacts {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding-top: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .admin-mobile-btn {
-        background: none;
-        border: none;
-        color: var(--accent-gold-light);
-        font-weight: 700;
-        font-size: 0.82rem;
-        margin-top: 8px;
-        text-align: center;
-        cursor: pointer;
-    }
-
-    /* 4. Hero на мобильных */
+    /* 4. Главный экран */
     .hero {
-        padding: 60px 0 80px;
+        padding: 50px 0 65px;
+    }
+
+    .hero-badge {
+        font-size: 0.75rem;
+        padding: 4px 12px;
+        margin-bottom: 14px;
     }
 
     .hero h1 {
-        font-size: 2.2rem;
+        font-size: 1.85rem;
+        line-height: 1.2;
+        margin-bottom: 14px;
     }
 
     .hero p {
-        font-size: 1.05rem;
-        margin-bottom: 25px;
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
     }
 
     .hero-stats {
-        gap: 20px;
-        flex-wrap: wrap;
+        gap: 14px;
+        justify-content: space-between;
+        padding-top: 18px;
     }
 
     .stat-item strong {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
-    /* 5. Поиск */
-    .search-wrapper {
-        margin-top: -30px;
+    .stat-item span {
+        font-size: 0.72rem;
     }
 
-    .search-bar {
+    /* 5. Поиск и фильтры */
+    .search-section {
+        margin-top: -20px;
+        margin-bottom: 25px;
+    }
+
+    .search-card {
         grid-template-columns: 1fr;
-        padding: 18px 16px;
+        padding: 16px;
         gap: 12px;
     }
 
-    .search-btn-col {
+    .search-btn-wrap {
         grid-column: span 1;
     }
 
-    /* 6. Карточки и калькулятор */
-    .properties-grid {
-        grid-template-columns: 1fr;
+    /* 6. Секции и карточки */
+    .section {
+        padding: 55px 0;
     }
 
+    .section-header {
+        margin-bottom: 30px;
+    }
+
+    .section-header h2 {
+        font-size: 1.7rem;
+    }
+
+    .section-header p {
+        font-size: 0.92rem;
+    }
+
+    .properties-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .card-media {
+        height: 200px;
+    }
+
+    .card-body {
+        padding: 18px;
+    }
+
+    .card-price {
+        font-size: 1.4rem;
+    }
+
+    .card-title {
+        font-size: 1.05rem;
+    }
+
+    /* 7. Калькулятор */
     .calc-card {
-        padding: 24px 18px;
+        padding: 20px 16px;
+        gap: 24px;
     }
 
     .calc-grid-two {
@@ -1504,20 +1547,25 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
     }
 
     .calc-result {
-        padding: 26px 18px;
+        padding: 22px 16px;
     }
 
     .result-sum {
-        font-size: 2rem;
+        font-size: 1.9rem;
     }
 
+    /* 8. Форма и контакты */
     .booking-info, .booking-form-wrap {
-        padding: 28px 20px;
+        padding: 24px 18px;
+    }
+
+    .booking-info h2 {
+        font-size: 1.55rem;
     }
 
     .footer-container {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 26px;
     }
 
     .form-row-2, .form-row-3 {
@@ -1526,10 +1574,10 @@ h1, h2, h3, h4, .btn, .logo-title, .section-tag, .prop-price-val {
 
     .details-grid {
         grid-template-columns: 1fr;
-        padding: 20px;
+        padding: 18px;
     }
 
     .details-gallery img {
-        height: 240px;
+        height: 220px;
     }
 }

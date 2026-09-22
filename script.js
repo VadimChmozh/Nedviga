@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="badge-gold">${prop.type}</span>
                     <h3>${prop.title}</h3>
                     <div class="details-price">${Number(prop.price).toLocaleString()} ₽</div>
-                    <div class="card-location" style="margin-bottom: 20px;">📍 ${prop.location}</div>
+                    <div class="card-location" style="margin-bottom: 16px;">📍 ${prop.location}</div>
                     
                     <div class="details-spec-list">
                         <div><strong>Площадь:</strong> ${prop.area} м²</div>
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div><strong>Ипотека:</strong> Подходит (от 6%)</div>
                     </div>
 
-                    <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.6;">${prop.desc}</p>
+                    <p style="color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">${prop.desc}</p>
                     
                     <a href="#booking" class="btn btn-gold btn-block" onclick="closeDetailsModal(); selectPropertyForLead('${prop.title}');">Забронировать просмотр этого объекта</a>
                 </div>
@@ -193,10 +193,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         document.getElementById('propDetailsModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
     };
 
     window.closeDetailsModal = () => {
         document.getElementById('propDetailsModal').classList.remove('active');
+        document.body.style.overflow = '';
     };
 
     // ==========================================================================
@@ -299,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (select) select.value = 'Консультация по подбору';
         if (comment) {
             const sum = document.getElementById('monthlyPayment').textContent;
-            comment.value = `Интересует расчет ипотеки. Ориентировочный платеж: ${sum}. Нужна помощь в одобрении.`;
+            comment.value = `Интересует расчет ипотеки. Ориентировочный платеж: ${sum}. Помогите с одобрением.`;
         }
     };
 
@@ -368,14 +370,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const comment = document.getElementById('clientComment').value.trim();
 
             if (phone.replace(/\D/g, '').length < 11) {
-                alert('Пожалуйста, введите номер телефона полностью: +7 (XXX) XXX-XX-XX');
+                alert('Пожалуйста, укажите полный номер телефона для связи!');
                 phoneInput.focus();
                 return;
             }
 
             const submitBtn = document.getElementById('submitLeadBtn');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Отправка...';
+            submitBtn.textContent = 'Отправка заявки...';
             submitBtn.disabled = true;
 
             const message = `🏢 НОВАЯ ЗАЯВКА НА НЕДВИЖИМОСТЬ!\n\n` +
@@ -396,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         signal: controller.signal
                     });
                 } catch (err) {
-                    console.log('TG');
+                    console.log('TG done');
                 } finally {
                     clearTimeout(timeoutId);
                 }
@@ -419,13 +421,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         })
                     });
                 } catch (e) {
-                    console.log('Email');
+                    console.log('Email done');
                 }
             };
 
             await Promise.allSettled([sendTelegram(), sendEmail()]);
 
-            alert(`Спасибо, ${name}! Ваша заявка успешно принята. Риелтор свяжется с вами по номеру ${phone} в течение 10 минут.`);
+            alert(`Спасибо, ${name}! Ваша заявка успешно отправлена риелтору. Мы перезвоним вам в течение 10 минут.`);
             realtorForm.reset();
 
             submitBtn.textContent = originalText;
@@ -440,6 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pass = prompt('Введите пароль администратора:', 'admin');
         if (pass === 'admin') {
             document.getElementById('adminModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
             renderAdminItems();
         } else if (pass !== null) {
             alert('Неверный пароль доступа!');
@@ -448,6 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.closeAdminModal = () => {
         document.getElementById('adminModal').classList.remove('active');
+        document.body.style.overflow = '';
     };
 
     window.switchAdminTab = (tabId) => {
@@ -600,7 +604,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ==========================================================================
-    // 8. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ И ШТОРКОЙ
+    // 8. УПРАВЛЕНИЕ ШТОРКОЙ МЕНЮ (DRAWER)
     // ==========================================================================
     function showToast(text) {
         const toast = document.getElementById('toastBox');
@@ -613,46 +617,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const burgerBtn = document.getElementById('burgerBtn');
-    const navMenu = document.getElementById('navMenu');
-    const navBackdrop = document.getElementById('navBackdrop');
-    const mobileNavClose = document.getElementById('mobileNavClose');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+    const drawerClose = document.getElementById('drawerClose');
 
-    window.closeMobileNav = () => {
-        if (navMenu) navMenu.classList.remove('active');
-        if (burgerBtn) burgerBtn.classList.remove('active');
-        if (navBackdrop) navBackdrop.classList.remove('active');
+    window.closeDrawer = () => {
+        if (mobileDrawer) mobileDrawer.classList.remove('active');
+        if (drawerBackdrop) drawerBackdrop.classList.remove('active');
         document.body.style.overflow = '';
     };
 
-    window.openMobileNav = () => {
-        if (navMenu) navMenu.classList.add('active');
-        if (burgerBtn) burgerBtn.classList.add('active');
-        if (navBackdrop) navBackdrop.classList.add('active');
+    window.openDrawer = () => {
+        if (mobileDrawer) mobileDrawer.classList.add('active');
+        if (drawerBackdrop) drawerBackdrop.classList.add('active');
         document.body.style.overflow = 'hidden';
     };
 
     if (burgerBtn) {
-        burgerBtn.addEventListener('click', () => {
-            if (navMenu.classList.contains('active')) {
-                window.closeMobileNav();
-            } else {
-                window.openMobileNav();
-            }
-        });
+        burgerBtn.addEventListener('click', window.openDrawer);
     }
 
-    if (mobileNavClose) {
-        mobileNavClose.addEventListener('click', window.closeMobileNav);
+    if (drawerClose) {
+        drawerClose.addEventListener('click', window.closeDrawer);
     }
 
-    if (navBackdrop) {
-        navBackdrop.addEventListener('click', window.closeMobileNav);
+    if (drawerBackdrop) {
+        drawerBackdrop.addEventListener('click', window.closeDrawer);
     }
 
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', window.closeMobileNav);
+    document.querySelectorAll('.drawer-link').forEach(link => {
+        link.addEventListener('click', window.closeDrawer);
     });
 
-    // Запуск сайта
+    // Запуск базы данных
     initDatabase();
 });
